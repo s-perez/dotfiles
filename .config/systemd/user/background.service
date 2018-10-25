@@ -1,0 +1,8 @@
+[Unit]
+Description=Set background image
+
+[Service]
+ExecStart=/usr/bin/feh --bg-scale '/home/sisekeom/Wallpapers/kimi_no_na_wa.jpg'
+
+[Install]
+WantedBy=default.target
