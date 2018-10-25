@@ -1,0 +1,22 @@
+Config { font = "xft:DejaVu Sans Mono:pixelsize=13"
+	   , bgColor = "black"
+	   , fgColor = "grey"
+	   , position = TopW L 100
+	   , commands = [ Run StdinReader
+					, Run Com "echo" ["<fc=blue>|</fc>"] "delim" 36000
+					, Run Com "echo" ["<fc=blue>·</fc>"] "sep" 36000
+	                , Run MultiCpu ["-L","25","-H","75","-n","green","-h","red","-t","[<autototal>]"] 10
+					, Run ThermalZone 0 ["-t","<temp>ºC"] 50
+					, Run Memory ["-L","25","-H","75","-n","green","-h","red","-t", "<usedratio>% RAM"] 50
+					, Run Wireless "wlp4s0" ["-L","40","-H","70","-l","red","-n","yellow","-h","green","-W","5","-f",")","-b"," ","-t","<essid> <qualitybar>"] 50
+					, Run Com "volume.sh" [] "myVolume" 20
+					, Run Battery ["-L","50","-H","15","-h","green","-n","yellow","-l","red","-b"," ","-t","<fc=yellow>⚡[<leftbar>]⚡</fc> +<timeleft>"] 100
+					, Run Date "<fc=orange>%a %b %_d %l:%M</fc>" "date" 100
+--					, Run Brightness ["-f","★","-b"," ","-t","<fc=yellow><bar></fc>"] 10
+--					, Run Weather "LEMD" ["-t","Madrid: <tempC>ºC (<hour>)"] 36000
+--					, Run Weather "ESSA" ["-t","Stockholm: <tempC>ºC (<hour>)"] 36000
+					]
+	   , sepChar = "%"
+	   , alignSep = "}{"
+	   , template = "%StdinReader%}{%delim% %multicpu% %thermal0% %sep% %memory% %sep% %wlp4s0wi% %sep% ♪ %myVolume% %sep% %battery% %sep% %date% %delim%"
+}
