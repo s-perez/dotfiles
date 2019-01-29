@@ -73,8 +73,20 @@ source $ZSH/oh-my-zsh.sh
 export EDITOR='vim'
 export JUPYTER_NOTEBOOKS_DIR="$HOME/code"
 export JUPYTER_HOME="$HOME/.notebooks"
+export TERM=xterm-256color
 
 # User configuration
+
+# FZF config
+# FZF
+export FZF_DEFAULT_OPTS="-m -1 -0 --history=$HOME/.fzf_history --reverse --min-height 15 --bind '?:toggle-preview' --color=dark"
+export FZF_COMPLETION_OPTS="--preview=\"file -b {}\" --preview-window=down:1"
+export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:wrap:hidden"
+export FZF_ALT_C_OPTS="--preview 'ls -A --color=always {}' --preview-window right:25%:hidden"
+if hash rg 2>/dev/null; then
+    export FZF_DEFAULT_COMMAND='rg --hidden --follow -uuu --files --no-messages'
+fi
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -102,6 +114,7 @@ export JUPYTER_HOME="$HOME/.notebooks"
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
 alias gdc="gd --cached"
 alias gboom="git stash; git stash drop"
 alias k8s="~sperez/code/k8s-definitions/scripts/k8s"
@@ -109,6 +122,9 @@ alias cat="bat --paging=never"
 alias ls="exa"
 alias c="j"
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+alias fn='funky'
+alias gfn='funky --global'
 
+[ -f ~/.local/share/funky/funky.sh ] && source ~/.local/share/funky/funky.sh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export DOCKER_SOCK_FILE=/var/run/docker.sock
